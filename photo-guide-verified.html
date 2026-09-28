@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#173c35">
+<title>2026日本東北自駕｜照片核對更正版</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:#f2f3ef;font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC",sans-serif}.bar{height:62px;background:#173c35;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 12px;position:relative;z-index:5;box-shadow:0 2px 10px #0002}.bar b{font-size:14px}.bar small{display:block;color:#dbe8e2;font-size:11px}.bar a{white-space:nowrap;color:#173c35;background:#fff;text-decoration:none;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:700}iframe{display:block;width:100%;height:calc(100vh - 62px);border:0;background:#f2f3ef}.verified-badge{display:inline-block;margin-top:5px;padding:3px 7px;border-radius:999px;background:#e7f2ec;color:#245346;font-size:.7rem;font-weight:800}.source-line{font-size:.7rem;color:#6b746f;margin-top:3px}.photo a{display:block}.photo img{cursor:zoom-in}@media(max-width:520px){.bar{height:70px}.bar b{font-size:12px}.bar small{font-size:10px}.bar a{font-size:11px;padding:6px 8px}iframe{height:calc(100vh - 70px)}}
+</style>
+</head>
+<body>
+<div class="bar"><div><b>照片核對更正版</b><small>指定住宿・街區・超市・奧入瀨 5 站已逐一換成精確照片</small></div><a href="./photo-guide.html" target="_blank">原版</a></div>
+<iframe id="guide" src="./photo-guide.html?v=20260928-verified" title="2026日本東北自駕照片導航"></iframe>
+<script>
+const FIX={
+ '御宿東鳳':{name:'御宿東鳳 Onyado Toho',img:'https://www.jtb.co.jp/premium/images/stories/2023-1h/4145903_00000000.jpg',src:'https://www.jtb.co.jp/kokunai-hotel/htl/2519001/',source:'JTB 御宿東鳳住宿頁'},
+ '七日町通り（七日町通）':{name:'七日町通り（七日町通）',img:'https://stat.ameba.jp/user_images/20250518/07/kame-tama1997/87/73/j/o1080081015597749227.jpg',src:'https://ameblo.jp/kame-tama1997/entry-12904025234.html',source:'七日町散步實拍'},
+ 'York Benimaru 城西町店':{name:'ヨークベニマル 城西町店（York Benimaru 城西町店）',img:'https://spacelab-system.jp/upload/facility/8458/1/%E3%83%A8%E3%83%BC%E3%82%AF%E3%83%99%E3%83%8B%E3%83%9E%E3%83%AB%E5%9F%8E%E8%A5%BF%E7%94%BA.png',src:'https://spacelab-system.jp/facility/8458',source:'城西町店設施頁'},
+ 'YuiLocalZao':{name:'YuiLocalZao',img:'https://travel.rakuten.co.jp/mytrip/sites/mytrip/files/styles/1cal_image/public/2026-02/news-202602-yuilocalzao-06.jpg?itok=YSoWJMF_',src:'https://travel.rakuten.co.jp/mytrip/news/2026-02-13-0',source:'楽天トラベル YuiLocalZao介紹'},
+ '蔵王温泉街（藏王溫泉街）':{name:'蔵王温泉街（藏王溫泉街）',img:'https://sp.jorudan.co.jp/onsen/images/spot/640/669_4.jpg',src:'https://sp.jorudan.co.jp/onsen/details/669/',source:'ジョルダン 藏王溫泉介紹'},
+ 'Hotel B4T Kakunodate':{name:'Hotel B4T Kakunodate（角館B4T酒店）',img:'https://cdn-ak.f.st-hatena.com/images/fotolife/h/hondamasahiro/20260321/20260321181432.jpg',src:'https://oyakotetsu-noritetsu.hatenablog.com/entry/2026/03/21/182244',source:'住宿實拍遊記'},
+ '角館武家屋敷通り（角館武家屋敷通）':{name:'角館武家屋敷通り（角館武家屋敷通）',img:'https://www.driveconsultant.jp/assets/img/spot/05/0001-2.jpg?size=medium',src:'https://www.driveconsultant.jp/detail/spot/279.html',source:'Drive Consultant 角館介紹'},
+ 'ホテル十和田荘（十和田莊）':{name:'ホテル十和田荘（十和田莊）',img:'https://livedoor.blogimg.jp/moya_sic/imgs/7/c/7c582763.jpg',src:'https://blog.livedoor.jp/moya_sic/archives/52372302.html',source:'十和田莊住宿實拍'},
+ '子ノ口（子之口）':{name:'子ノ口（子之口）',img:'https://rimage.gnst.jp/livejapan.com/public/article/detail/a/30/00/a3000124/img/ja/a3000124_parts_5f61e97352bf2.jpg?20201211183219=&q=80',src:'https://livejapan.com/ja/in-tohoku/in-pref-aomori/in-aomori_hirosaki_hachinohe/article-a3000124/',source:'LIVE JAPAN 奧入瀨實地報導'},
+ '銚子大滝（銚子大瀑布）':{name:'銚子大滝（銚子大瀑布）',img:'https://travel.rakuten.com/contents/sites/contents/files/styles/max_1300x1300/public/2025-06/oirase-gorge_9.jpg?itok=MhTbM9zv',src:'https://travel.rakuten.com/contents/usa/en-us/guide/oirase-gorge/',source:'Rakuten Travel 奧入瀨指南'},
+ '雲井の滝（雲井瀑布）':{name:'雲井の滝（雲井瀑布）',img:'https://cdn.4travel.jp/img/thumbnails/imk/travelogue_pict/82/97/73/650x_82977325.jpg?updated_at=1725003108',src:'https://4travel.jp/travelogue/11925896',source:'4travel 旅人實拍'},
+ '阿修羅の流れ（阿修羅之流）':{name:'阿修羅の流れ（阿修羅之流）',img:'https://image.ganref.jp/photos/members/ondeco/MDAwMDA0ODAyOA_MC41OTY4MjAwMCAxNjU1NTY0MzI3_NzcyOTgz_3.jpg',src:'https://ganref.jp/m/ondeco/portfolios/photo_detail/4922705',source:'GANREF 攝影作品'},
+ '石ヶ戸（石戶）':{name:'石ヶ戸（石戶）',img:'https://www.jre-travel.com/content/dam/jretravel/site/page/article/images/00220/a00220_08_p.jpg',src:'https://www.jre-travel.com/article/00220/',source:'JR東日本 びゅうトラベル'}
+};
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function exactKey(text){
+ const keys=Object.keys(FIX);
+ if(text.includes('York Benimaru 城西町店')) return 'York Benimaru 城西町店';
+ if(text.includes('YuiLocalZao')) return 'YuiLocalZao';
+ if(text.includes('Hotel B4T Kakunodate')) return 'Hotel B4T Kakunodate';
+ if(text.includes('御宿東鳳')) return '御宿東鳳';
+ if(text.includes('七日町通り（七日町通）')) return '七日町通り（七日町通）';
+ return keys.find(k=>text.includes(k));
+}
+function patch(){
+ const f=document.getElementById('guide');
+ const d=f.contentDocument;
+ if(!d)return;
+ const rows=[...d.querySelectorAll('.row')];
+ rows.forEach(row=>{
+   const p=row.querySelector('.place'); if(!p)return;
+   const text=p.textContent.trim(); const k=exactKey(text); if(!k)return;
+   // 避免把「前往...」的移動列也放照片
+   if(text.startsWith('前往')||text.includes('→'))return;
+   const x=FIX[k];
+   if(k==='York Benimaru 城西町店'){
+     p.textContent='York Benimaru 城西町店（超級市場）';
+     const desc=row.querySelector('.desc'); if(desc)desc.textContent='水果、牛奶、優格、飯糰、小孩食品';
+   }
+   const old=row.querySelector('.photo'); if(old)old.remove();
+   const box=d.createElement('div'); box.className='photo';
+   box.innerHTML=`<a href="${esc(x.src)}" target="_blank" rel="noopener"><img referrerpolicy="no-referrer" loading="lazy" src="${esc(x.img)}" alt="${esc(x.name)}" onerror="this.closest('.photo').innerHTML='<div class=\\'fallback\\'>照片暫時無法載入，請按 Google Maps 查看現場照片。</div>'"></a><div class="pcap"><b>📷 ${esc(x.name)}</b><span class="verified-badge">已逐一核對：此照片就是該地點</span><div class="source-line">照片來源：${esc(x.source)}｜點照片看來源頁</div></div>`;
+   const map=row.querySelector('a.map'); if(map)row.insertBefore(box,map); else row.appendChild(box);
+ });
+ // D8 加核對提示
+ [...d.querySelectorAll('.day')].forEach(day=>{
+   const h=day.querySelector('h3'); if(!h||!h.textContent.includes('10/6'))return;
+   if(day.querySelector('.oirase-verified'))return;
+   const body=day.querySelector('.daybody'); if(!body)return;
+   const n=d.createElement('div');n.className='warn oirase-verified';n.style.background='#edf6f1';n.style.borderLeftColor='#295b50';n.innerHTML='<b>📷 奧入瀨照片已逐站核對：</b>子之口、銚子大瀑布、雲井瀑布、阿修羅之流、石戶，現在全部使用各地點自己的照片，不再共用同一張溪流照。';
+   body.insertBefore(n,body.firstChild);
+ });
+ // 把補充 CSS 寫進 iframe
+ if(!d.getElementById('verified-photo-style')){
+   const st=d.createElement('style');st.id='verified-photo-style';st.textContent='.verified-badge{display:inline-block;margin-top:5px;padding:3px 7px;border-radius:999px;background:#e7f2ec;color:#245346;font-size:.7rem;font-weight:800}.source-line{font-size:.7rem;color:#6b746f;margin-top:3px}.photo a{display:block}.photo img{cursor:zoom-in}';d.head.appendChild(st);
+ }
+}
+document.getElementById('guide').addEventListener('load',()=>{setTimeout(patch,250);setTimeout(patch,900)});
+</script>
+</body>
+</html>
